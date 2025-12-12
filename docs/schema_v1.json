@@ -1,0 +1,32 @@
+{
+  "version": "v1",
+  "encoding": "utf-8",
+  "delimiter": ",",
+  "quotechar": "\"",
+  "columns_in_order": [
+    "Firm",
+    "Firm.Type",
+    "Sector.Tag",
+    "Platform/PortCo Name",
+    "Website",
+    "Country",
+    "State",
+    "City",
+    "Source_URL",
+    "Source_Type",
+    "Notes",
+    "# Locations",
+    "RealEstate_Intensity_Flag"
+  ],
+  "required_columns": [
+    "Firm",
+    "Firm.Type",
+    "Sector.Tag",
+    "Platform/PortCo Name",
+    "Website",
+    "Country",
+    "Source_URL",
+    "Source_Type"
+  ],
+  "optional_columns": ["State", "City", "Notes", "# Locations", "RealEstate_Intensity_Flag"]
+}
