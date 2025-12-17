@@ -10,6 +10,7 @@ dependencies = [
   "playwright>=1.48",
   "celery>=5.4",
   "redis>=5.0",
+  "structlog"
 ]
 
 [tool.black]
