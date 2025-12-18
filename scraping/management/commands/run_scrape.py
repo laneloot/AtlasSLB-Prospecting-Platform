@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+
 from scraping.services.run_service import ScrapeRunService
 from scraping.services.seed_service import SeedService
 from scraping.services.target_service import ScrapeTargetService
@@ -32,9 +33,24 @@ class Command(BaseCommand):
 
             try:
                 target_service.start(target)
-                # Playwright will be plugged in Phase 1
-                target_service.succeed(target, http_status=200)
+
+                from scraping.browser.browser_manager import BrowserManager
+                from scraping.browser.page_fetcher import PageFetcher
+
+                browser = BrowserManager(headless=True)
+                browser.start()
+
+                fetcher = PageFetcher(browser)
+
+                # inside loop (replace placeholder)
+                result = fetcher.fetch(target.url)
+                target_service.succeed(
+                    target,
+                    http_status=result.get("http_status"),
+                )
+
                 run.succeeded_targets += 1
+                browser.stop()
 
             except Exception as e:
                 target_service.fail(target, "UNKNOWN_ERROR", str(e))
