@@ -27,6 +27,13 @@ class ScrapeTargetService:
         )
 
     def fail(self, target, error_type, message=""):
+        # if target.retries < 2 and error_type in ["TIMEOUT", "BROWSER_ERROR"]:
+        #     target.retries += 1
+        #     target.save()
+        #     # re-attempt fetch
+        # else:
+        #     run.failed_targets += 1
+
         target.finished_at = timezone.now()
         target.duration_ms = int(
             (target.finished_at - target.started_at).total_seconds() * 1000
